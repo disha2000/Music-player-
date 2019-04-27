@@ -6,9 +6,13 @@ Before Run:
 install following lib
 
 pip install tkinter // to build GUI
+
 pip install pygame // to play music
+
 pip install tinytag
+
 pip install pillow. // to resize image
+
 
 To run this program use follwing command:
 
