@@ -1,0 +1,15 @@
+from Tkinter import *
+
+root = Tk()
+root.wm_title("Title:D")
+
+root.geometry('{}x{}'.format(500, 250))
+
+photo = PhotoImage(file="spaz.gif")
+label = Label(root, image=photo)
+label.grid(row=1, column=1)
+
+w = Label(root, text="This label", fg="red", font=("Helvetica", 16))
+w.grid(row=5, column=20)
+
+root.mainloop()

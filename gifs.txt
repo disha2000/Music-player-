@@ -1,0 +1,7 @@
+imagelist=["love1.gif","love2.gif","love3.gif","love4.gif","love5.gif","love6.gif","love7.gif","love8.gif","love9.gif","love10.gif","love11.gif","love12.gif","love13.gif","love14.gif","love15.gif","love16.gif"]
+
+
+
+
+imagelist=["all1.gif","all2.gif","all3.jpg","all4.gif","all5.gif","all6.gif","all7.jpg","all8.jpg","all9.jpg",
+"all10.jpg","all11.jpg","all12.jpg","all13.jpg","all14.gif","all15.gif"]

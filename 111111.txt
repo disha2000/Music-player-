@@ -1,0 +1,74 @@
+
+import tkinter as tk
+from tkinter import ttk
+
+import mp3play
+
+# ================================================================================
+
+def format_duration(ms):
+    total_s = ms / 1000
+    total_min = total_s / 60
+    remain_s = total_s % 60
+    return "%0d:%02d" % (total_min, remain_s)
+
+# ================================================================================
+
+class SimplePlayer(tk.Tk):
+
+    def __init__(self, *args, **kwargs):
+        tk.Tk.__init__(self, *args, **kwargs)
+
+        # Variables we use to dynamically update the text of the labels
+        self.music_title = tk.StringVar()
+        self.music_progress = tk.StringVar()
+
+        self.fr=ttk.Frame()
+        self.fr.pack(expand=True, fill=tk.BOTH, side=tk.TOP)
+
+        # Label to display the song title
+        self.title_lbl = ttk.Label(self.fr, textvariable = self.music_title)
+        self.title_lbl.pack()
+
+        # Playback progress bar
+        self.progress_bar = ttk.Progressbar(self.fr, orient='horizontal', mode='determinate', length=500)
+        self.progress_bar.pack()
+
+        # Shows the progress numerically
+        self.progress_lbl = ttk.Label(self.fr, textvariable = self.music_progress)
+        self.progress_lbl.pack()
+
+
+    def start(self, music_file):
+        self.music = mp3play.load(music_file)
+
+        # Update the title
+        self.music_title.set(music_file)
+
+        # Start playback
+        self.music.play()
+
+        # Start periodically updating the progress bar and progress label
+        self.update_progress()
+
+    def update_progress(self):
+        pos_ms = self.music.current_position()
+        total_ms = self.music.milliseconds()
+        progress_percent = pos_ms / float(total_ms) * 100
+
+        # Update the label
+        label_text = "%s / %s   (%0.2f %%)" % (format_duration(pos_ms), format_duration(total_ms), progress_percent)
+        self.music_progress.set(label_text)
+
+        # Update the progress bar
+        self.progress_bar["value"] = progress_percent
+
+        # Schedule next update in 100ms        
+        self.after(100, self.update_progress)
+
+# ================================================================================
+
+app = SimplePlayer()
+
+app.start('test.mp3')
+app.mainloop()
